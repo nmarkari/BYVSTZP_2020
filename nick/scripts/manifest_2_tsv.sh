@@ -1,10 +1,10 @@
 #!/bin/bash
 
-#convert NeMO manifest (which did not work with portal_client) to a tsv of URL's for wget
+#convert object from google chrome to a tsv of URL's for wget
 
-for manifest in "../data_manifests/Dong-Wook/NeMO_manifest_DW_SMARTseqv4"
+for manifest in "../data_manifests/Dong-Wook/DW_SS4_VMH_manifest" "../data_manifests/Dong-Wook/DW_SS4_VMHvl_manifest"
 do
-	IN="${manifest}.tsv"
+	IN="${manifest}"
 	OUT="${manifest}_wget.tsv"
-	awk 'NR>1 {p=index($5,",");print substr($5,p+1)}' $IN > $OUT
+	awk '{s=index($0,"http");e=index($0,".tar");print substr($0,s,e+4-s)}' $IN > $OUT
 done

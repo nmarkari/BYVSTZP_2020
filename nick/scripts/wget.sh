@@ -6,6 +6,6 @@ for manifest_wget in "../data_manifests/Dong-Wook/NeMO_manifest_DW_SMARTseqv4_wg
 do
 	while read -r URL
 	do
-	   wget $URL
+	   wget $URL -P "../../data/DW/SS4"
 	done < $manifest_wget
 done

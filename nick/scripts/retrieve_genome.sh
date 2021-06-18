@@ -1,11 +1,11 @@
 #!/bin/bash
 
-#retrieve grcm39 genome and gene annotations
+#retrieve grcm39 genome and gene annotations from ensembl on 6/18/2021
 
 OUT="../../data/ref/"
 
-wget https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/10090/109/GCF_000001635.27_GRCm39/GCF_000001635.27_GRCm39_genomic.fna.gz -P $OUT
-wget https://ftp.ncbi.nlm.nih.gov/genomes/all/annotation_releases/10090/109/GCF_000001635.27_GRCm39/GCF_000001635.27_GRCm39_genomic.gtf.gz -P $OUT
+wget http://ftp.ensembl.org/pub/release-104/fasta/mus_musculus/dna/Mus_musculus.GRCm39.dna.primary_assembly.fa.gz -P $OUT
+wget http://ftp.ensembl.org/pub/release-104/gtf/mus_musculus/Mus_musculus.GRCm39.104.gtf.gz -P $OUT
 
-gunzip -c ${OUT}GCF_000001635.27_GRCm39_genomic.fna.gz > $OUT/genome.fa
-gunzip -c ${OUT}GCF_000001635.27_GRCm39_genomic.gtf.gz > $OUT/genes.gtf
+gunzip -c ${OUT}Mus_musculus.GRCm39.dna.primary_assembly.fa.gz > $OUT/genome.fa
+gunzip -c ${OUT}Mus_musculus.GRCm39.104.gtf.gz > $OUT/genes.gtf

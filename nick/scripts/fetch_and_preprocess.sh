@@ -1,5 +1,5 @@
 #!/bin/bash
-
+  
 #executes other scripts in this folder from start to finish
 
 #retrieve data
@@ -20,3 +20,4 @@ bash wget.sh
 bash retrieve_genome.sh
 bash kb_index.sh
 bash kb_count.sh
+python3 make_length_info.py

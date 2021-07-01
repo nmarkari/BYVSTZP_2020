@@ -7,14 +7,14 @@
 #	rm $f
 #done
 
-for d in ../../data/raw/DW/SS4/VMH/*
-do
-        for f in $d/*
-        do
-                gunzip -c $f > ${f%.gz}
-                rm $f
-        done
-done
+#for d in ../../data/raw/DW/SS4/VMH/*
+#do
+#        for f in $d/*
+#        do
+#                gunzip -c $f > ${f%.gz}
+#                rm $f
+#        done
+#done
 
 
 #for f in ../../data/raw/DW/SS4/VMHvl/*.tar
@@ -23,7 +23,15 @@ done
 #	rm $f
 #done
 
-for d in ../../data/raw/DW/SS4/VMHvl/*
+#for d in ../../data/raw/DW/SS4/VMHvl/*
+#do
+#        for f in $d/*
+#        do
+#                gunzip -c $f > ${f%.gz}
+#                rm $f
+#        done
+#done
+for d in ../../data/raw/Yao/SS4/ACA/*
 do
         for f in $d/*
         do
@@ -31,3 +39,4 @@ do
                 rm $f
         done
 done
+

@@ -22,11 +22,13 @@ bash untar.sh
 
 
 #retrieve reference genome, use kb to preprocess data
-#bash retrieve_genome.sh
-#bash kb_index.sh
+echo 'BEGIN retrieve_genome.sh'
+bash retrieve_genome.sh
+echo 'BEGIN kb_index.sh'
+bash kb_index.sh
 echo 'BEGIN kb_count.sh'
 bash kb_count.sh
-#echo 'BEGIN make_length_info.py'
-#python3 make_length_info.py
+echo 'BEGIN make_length_info.py'
+python3 make_length_info.py
 echo 'BEGIN make_adata.py'
 ./make_adata.py -m '../../data/preprocessed/Yao/SS4/ACA/matrix.abundance.mtx' -c '../../data/preprocessed/Yao/SS4/ACA/matrix.cells' -t '../../data/preprocessed/Yao/SS4/ACA/transcripts.txt' --outdir '../../data/preprocessed/Yao/SS4/ACA'

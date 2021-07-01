@@ -19,7 +19,7 @@
 #		wget $URL -P $OUT >> log.txt
 #	done < $manifest_wget
 #done
-for manifest_wget in "../../data/raw/data_manifests/Yao/Yao_SS4_ACA_wget.tsv"
+for manifest_wget in "../../nick/data_manifests/Yao/Yao_SS4_ACA_wget.tsv"
 do
 	while read -r URL
 	do

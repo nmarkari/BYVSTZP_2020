@@ -21,3 +21,11 @@ if __name__ == "__main__":
     p.add_argument('-m', action="store", dest="matrix", help="matrix abundance file" )
     p.add_argument('-c', action="store", dest="cells", help="cells file" )
     p.add_argument('-t', action="store", dest="transcripts", help="transcripts file" )
+
+    p.add_argument("--outdir", help="path to save adata.h5ad", default="./")
+
+    args = p.parse_args()
+
+    adata = main(args.matrix, args.cells, args.transcripts)
+    adata.write(os.path.join(args.outdir,"adata.h5ad"))
+

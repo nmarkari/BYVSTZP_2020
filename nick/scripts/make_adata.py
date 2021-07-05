@@ -15,6 +15,7 @@ def main(matrix, cells, transcripts,meta):
     metadata_full = pd.read_csv(meta)
     metadata_aca = metadata_full.loc[lambda df: df['region_label'] == 'ACA', :]
     rows = pd.read_csv(cells, header=None, names=["cell_id"])
+    rows['cell_id'] = rows['cell_id'].apply(lambda x: x.split("/")[8])
     rows.merge(metadata_aca[['exp_component_name','cluster_id','cluster_label','subclass_id','subclass_label']], how='left')
 
     adata = anndata.AnnData(X=CSRmatrix, obs=rows, var=cols)

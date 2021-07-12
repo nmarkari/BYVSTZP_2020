@@ -26,8 +26,8 @@ echo 'BEGIN retrieve_genome.sh'
 bash retrieve_genome.sh
 echo 'BEGIN kb_index.sh'
 bash kb_index.sh
-echo 'BEGIN kb_count.sh'
-bash kb_count.sh
+echo 'BEGIN kallisto_count.sh'
+bash kallisto_count.sh
 echo 'BEGIN make_length_info.py'
 python3 make_length_info.py
 echo 'BEGIN make_adata.py'

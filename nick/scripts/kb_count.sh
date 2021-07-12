@@ -2,14 +2,7 @@
 
 #need to put in a script to make batch.txt files
 
-#~/usr/local/bin/kallisto pseudo --quant -i ../../data/ref/index.idx -o ../../data/preprocessed/DW/SS4/VMH_output  -b ../../data/preprocessed/DW/SS4/VMH/batch.txt -t 16
-#~/usr/local/bin/kallisto pseudo --quant -i ../../data/ref/index.idx -o ../../data/preprocessed/DW/SS4/VMHvl_output  -b ../../data/preprocessed/DW/SS4/VMHvl/batch.txt -t 16
+ls ../../data/raw/Yao/SS4/10x/*/*R1.fastq | sort | awk '{cell=substr($1,0,length($1)-9); print cell, cell"_R1.fastq ", cell"_R2.fastq" }' OFS="\t" > ../../data/preprocessed/Yao/10x/ACA/batch.txt
+kb count -i ../../data/ref/index.idx -g ../../data/ref/t2g.txt -x 10xv2 -o ../../data/preprocessed/Yao/10x/ACA -t 16 --h5ad ../../data/preprocessed/Yao/10x/ACA
 
 
-#kb count -i ../../data/ref/index.idx -g ../../data/ref/t2g.txt -x SMARTSEQ -o ../../data/preprocessed/DW/SS4/VMH_output -t 16 --h5ad ../../data/preprocessed/DW/SS4/VMH/batch.txt
-#kb count -i ../../data/ref/index.idx -g ../../data/ref/t2g.txt -x SMARTSEQ -o ../../data/preprocessed/DW/SS4/VMHvl_output -t 16 --h5ad ../../data/preprocessed/DW/SS4/VMHvl/batch.txt
-
-
-# make batch.txt file
-ls ../../data/raw/Yao/SS4/ACA/*/*R1.fastq | sort | awk '{cell=substr($1,0,length($1)-9); print cell, cell"_R1.fastq ", cell"_R2.fastq" }' OFS="\t" > ../../data/preprocessed/Yao/SS4/ACA/batch.txt
-~/usr/local/bin/kallisto pseudo --quant -i ../../data/ref/index.idx -o ../../data/preprocessed/Yao/SS4/ACA  -b ../../data/preprocessed/Yao/SS4/ACA/batch.txt -t 16

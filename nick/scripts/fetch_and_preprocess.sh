@@ -14,10 +14,14 @@ set -o errexit
 #}
 for REGION in 'HIP' 'ORB' 'ENTm' 'ENTl' 'PAR-POST-Pre' 'SUB-ProS'
 do
-	mkdir "../../data/raw/Yao/SS4/$REGION"
-	#mkdir "../../data/raw/Yao/10x/$REGION"
-	mkdir "../../data/preprocessed/Yao/SS4/$REGION"
-	#mkdir "../../data/preprocessed/Yao/10x/$REGION"
+	if [ ! -d "../../data/raw/Yao/SS4/$REGION" ]; then
+		mkdir "../../data/raw/Yao/SS4/$REGION"
+	fi
+		#mkdir "../../data/raw/Yao/10x/$REGION"
+		#mkdir "../../data/preprocessed/Yao/10x/$REGION"
+	if [ ! -d "../../data/preprocessed/Yao/SS4/$REGION" ]; then
+		mkdir "../../data/preprocessed/Yao/SS4/$REGION"
+	fi
 	echo "BEGIN REGION: " $REGION
 
 	#BUILD REF
@@ -35,7 +39,7 @@ do
 	#echo "BEGIN manifest_2_tsv.sh SS4 $REGION"
 	#bash manifest_2_tsv.sh $REGION
 	echo "BEGIN make_manifest.py SS4 $REGION"
-	bash make_manifest.py -tech "SS4" -region $REGION
+	./make_manifest.py -tech "SS4" -region $REGION
 	echo "BEGIN wget.sh SS4 $REGION"
 	bash wget.sh SS4 $REGION
 	echo "BEGIN untar.sh SS4 $REGION"

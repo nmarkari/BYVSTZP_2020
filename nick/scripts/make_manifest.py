@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-
 import pandas as pd
+import argparse
 
 def main(tech, region):
     all_metadata = pd.read_csv('../metadata_files/CTX_Hip_anno_SSv4.csv')
@@ -26,5 +26,5 @@ if __name__ == "__main__":
 	p.add_argument("-tech", action="store", dest="tech",help="sequencing technology")
 	p.add_argument("-region", action="store", dest="region",help="brain region")
 	args = p.parse_args()
-	adata = main(args.tech, args.region)
+	manifest = main(args.tech, args.region)
 	manifest.to_csv('../../nick/data_manifests/Yao/Yao_'+tech+'_'+region+'.csv',sep='\t',index=False,header=False)

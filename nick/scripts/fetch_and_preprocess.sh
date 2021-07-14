@@ -35,13 +35,13 @@ do
 	#echo "BEGIN manifest_2_tsv.sh SS4 $REGION"
 	#bash manifest_2_tsv.sh $REGION
 	echo "BEGIN make_manifest.py SS4 $REGION"
-	bash make_manifest.py SS4 $REGION
+	bash make_manifest.py -tech "SS4" -region $REGION
 	echo "BEGIN wget.sh SS4 $REGION"
-	bash wget.sh $REGION
+	bash wget.sh SS4 $REGION
 	echo "BEGIN untar.sh SS4 $REGION"
-	bash untar.sh $REGION
-	echo "BEGIN kallisto_count.sh SS4 $REGION"
-	bash kallisto_count.sh $REGION
+	bash untar.sh SS4 $REGION
+	echo "BEGIN batch.sh SS4 $REGION"
+	bash kallisto_count.sh SS4 $REGION
 	echo "BEGIN make_adata.py SS4 $REGION"
 	./make_adata.py -m "../../data/preprocessed/Yao/SS4/$REGION/matrix.abundance.mtx" \
 		-c "../../data/preprocessed/Yao/SS4/$REGION/matrix.cells" -t "../../data/preprocessed/Yao/SS4/$REGION/transcripts.txt" \

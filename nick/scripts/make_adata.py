@@ -31,7 +31,7 @@ if __name__ == "__main__":
     p.add_argument('-meta', action="store", dest="meta", help="metadata file" )
 
     p.add_argument("--outdir", help="path to save adata.h5ad", default="./")
-    p.add_argument("-region", help="brain region")
+    p.add_argument("-region", action="store", dest="region",help="brain region")
 
     args = p.parse_args()
 

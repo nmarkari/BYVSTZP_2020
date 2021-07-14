@@ -1,6 +1,7 @@
 #!/bin/bash
 
-
+TECH=$1
+REGION=$2 
 #~/usr/local/bin/kallisto pseudo --quant -i ../../data/ref/index.idx -o ../../data/preprocessed/DW/SS4/VMH_output  -b ../../data/preprocessed/DW/SS4/VMH/batch.txt -t 16
 #~/usr/local/bin/kallisto pseudo --quant -i ../../data/ref/index.idx -o ../../data/preprocessed/DW/SS4/VMHvl_output  -b ../../data/preprocessed/DW/SS4/VMHvl/batch.txt -t 16
 
@@ -10,6 +11,6 @@
 
 
 # make batch.txt file
-ls ../../data/raw/Yao/SS4/ACA/*/*R1.fastq | sort | awk '{cell=substr($1,0,length($1)-9); print cell, cell"_R1.fastq ", cell"_R2.fastq" }' OFS="\t" > ../../data/preprocessed/Yao/SS4/ACA/batch.txt
+ls ../../data/raw/Yao/$TECH/$REGION/*/*R1.fastq | sort | awk '{cell=substr($1,0,length($1)-9); print cell, cell"_R1.fastq ", cell"_R2.fastq" }' OFS="\t" > ../../data/preprocessed/Yao/$TECH/$REGION/batch.txt
 #run kallisto
-~/usr/local/bin/kallisto pseudo --quant -i ../../data/ref/index.idx -o ../../data/preprocessed/Yao/SS4/ACA  -b ../../data/preprocessed/Yao/SS4/ACA/batch.txt -t 16
+~/usr/local/bin/kallisto pseudo --quant -i ../../data/ref/index.idx -o ../../data/preprocessed/Yao/$TECH/$REGION  -b ../../data/preprocessed/Yao/$TECH/$REGION/batch.txt -t 16

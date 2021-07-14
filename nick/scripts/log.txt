@@ -1,0 +1,21 @@
+BEGIN  ACA
+BEGIN retrieve_genome.sh
+BEGIN kb_index.sh
+BEGIN make_length_info.py
+BEGIN manifest_2_tsv.sh SS4 ACA
+BEGIN wget.sh SS4 ACA
+BEGIN untar.sh SS4 ACA
+BEGIN kallisto_count.sh SS4 ACA
+BEGIN make_adata.py SS4 ACA
+Traceback (most recent call last):
+  File "./make_adata.py", line 38, in <module>
+    adata = main(args.matrix, args.cells, args.transcripts, args.meta)
+  File "./make_adata.py", line 11, in main
+    COOmatrix = mmread(matrix)
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/scipy/io/mmio.py", line 72, in mmread
+    return MMFile().read(source)
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/scipy/io/mmio.py", line 422, in read
+    stream, close_it = self._open(source)
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/scipy/io/mmio.py", line 324, in _open
+    stream = open(filespec, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '../../data/preprocessed/Yao/SS4/ACA/matrix.abundance.mtx'

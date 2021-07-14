@@ -1,5 +1,5 @@
 #!/bin/bash
-  
+set -o errexit 
 #executes other scripts in this folder from start to finish
 
 #retrieve data
@@ -12,23 +12,40 @@
 #        arr.push(l[i].href);
 #    }
 #}
-#echo 'BEGIN manifest_2_tsv.sh'
-#bash manifest_2_tsv.sh
-#echo 'BEGIN WGET.SH'
-#bash wget.sh
-#echo 'BEGIN untar'
-#bash untar.sh
+for REGION in 'HIP' 'ORB' 'ENTm' 'ENTl' 'PAR-POST-Pre' 'SUB-ProS'
+do
+	mkdir "../../data/raw/Yao/SS4/$REGION"
+	#mkdir "../../data/raw/Yao/10x/$REGION"
+	mkdir "../../data/preprocessed/Yao/SS4/$REGION"
+	#mkdir "../../data/preprocessed/Yao/10x/$REGION"
+	echo "BEGIN REGION: " $REGION
 
+	#BUILD REF
+	if [ ! -d "../../data/ref" ]; then
+		mkdir ../../data/ref
+	    echo "BEGIN retrieve_genome.sh"
+		bash retrieve_genome.sh
+		echo "BEGIN kb_index.sh"
+		bash kb_index.sh
+		echo "BEGIN make_length_info.py"
+		python3 make_length_info.py
+	fi
 
-
-#retrieve reference genome, use kb to preprocess data
-#echo 'BEGIN retrieve_genome.sh'
-#bash retrieve_genome.sh
-#echo 'BEGIN kb_index.sh'
-#bash kb_index.sh
-#echo 'BEGIN kb_count.sh'
-#bash kb_count.sh
-#echo 'BEGIN make_length_info.py'
-#python3 make_length_info.py
-echo 'BEGIN make_adata.py'
-./make_adata.py -m '../../data/preprocessed/Yao/SS4/ACA/matrix.abundance.mtx' -c '../../data/preprocessed/Yao/SS4/ACA/matrix.cells' -t '../../data/preprocessed/Yao/SS4/ACA/transcripts.txt' -meta '../metadata_files/CTX_Hip_anno_SSv4.csv' --outdir '../../data/preprocessed/Yao/SS4/ACA'
+	#SMARTSEQ
+	#echo "BEGIN manifest_2_tsv.sh SS4 $REGION"
+	#bash manifest_2_tsv.sh $REGION
+	echo "BEGIN make_manifest.py SS4 $REGION"
+	bash make_manifest.py SS4 $REGION
+	echo "BEGIN wget.sh SS4 $REGION"
+	bash wget.sh $REGION
+	echo "BEGIN untar.sh SS4 $REGION"
+	bash untar.sh $REGION
+	echo "BEGIN kallisto_count.sh SS4 $REGION"
+	bash kallisto_count.sh $REGION
+	echo "BEGIN make_adata.py SS4 $REGION"
+	./make_adata.py -m "../../data/preprocessed/Yao/SS4/$REGION/matrix.abundance.mtx" \
+		-c "../../data/preprocessed/Yao/SS4/$REGION/matrix.cells" -t "../../data/preprocessed/Yao/SS4/$REGION/transcripts.txt" \
+		-meta "../metadata_files/CTX_Hip_anno_SSv4.csv" --outdir "../../data/preprocessed/Yao/SS4/$REGION" -region $REGION
+	echo "DELETING fastqs for SS4 $REGION"
+	bash rm -r ../../data/raw/Yao/SS4/$REGION/*
+done

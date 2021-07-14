@@ -4,7 +4,7 @@ import pandas as pd
 import argparse
 
 def main(tech, region):
-    all_metadata = pd.read_csv('../metadata_files/CTX_Hip_anno_SSv4.csv')
+	all_metadata = pd.read_csv('../metadata_files/CTX_Hip_anno_SSv4.csv')
 	all_metadata = all_metadata.rename(columns={'exp_component_name':'cell_id'})
 	metadata = all_metadata.loc[lambda df: df['region_label'] == region, :]
 
@@ -19,7 +19,7 @@ def main(tech, region):
 	manifest = set_intersection.url
 	manifest
 
-    return manifest
+	return manifest
 
 if __name__ == "__main__":
 	p = argparse.ArgumentParser(description="generates manifest for biccn ftp site")

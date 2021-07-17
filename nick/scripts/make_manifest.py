@@ -27,4 +27,4 @@ if __name__ == "__main__":
 	p.add_argument("-region", action="store", dest="region",help="brain region")
 	args = p.parse_args()
 	manifest = main(args.tech, args.region)
-	manifest.to_csv('../../nick/data_manifests/Yao/Yao_'+tech+'_'+region+'.csv',sep='\t',index=False,header=False)
+	manifest.to_csv('../../nick/data_manifests/Yao/Yao_'+args.tech+'_'+args.region+'_wget.tsv',sep='\t',index=False,header=False)

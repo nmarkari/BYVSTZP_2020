@@ -4,7 +4,7 @@
 TECH=$1
 REGION=$2
 
-for manifest_wget in "../../nick/data_manifests/Yao/Yao_$TECH_$REGION_wget.tsv"
+for manifest_wget in "../../nick/data_manifests/Yao/Yao_${TECH}_${REGION}_wget.tsv"
 do
 	while read -r URL
 	do

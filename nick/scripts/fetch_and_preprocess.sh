@@ -12,7 +12,8 @@ set -o errexit
 #        arr.push(l[i].href);
 #    }
 #}
-for REGION in 'HIP' 'ORB' 'ENTm' 'ENTl' 'PAR-POST-Pre' 'SUB-ProS'
+#HIP failed to make adata
+for REGION in 'ORB' 'ENTm' 'ENTl' 'PAR-POST-Pre' 'SUB-ProS'
 do
 	if [ ! -d "../../data/raw/Yao/SS4/$REGION" ]; then
 		mkdir "../../data/raw/Yao/SS4/$REGION"
@@ -44,7 +45,7 @@ do
 	bash wget.sh SS4 $REGION
 	echo "BEGIN untar.sh SS4 $REGION"
 	bash untar.sh SS4 $REGION
-	echo "BEGIN batch.sh SS4 $REGION"
+	echo "BEGIN kallisto_count.sh SS4 $REGION"
 	bash kallisto_count.sh SS4 $REGION
 	echo "BEGIN make_adata.py SS4 $REGION"
 	./make_adata.py -m "../../data/preprocessed/Yao/SS4/$REGION/matrix.abundance.mtx" \
@@ -52,4 +53,5 @@ do
 		-meta "../metadata_files/CTX_Hip_anno_SSv4.csv" --outdir "../../data/preprocessed/Yao/SS4/$REGION" -region $REGION
 	echo "DELETING fastqs for SS4 $REGION"
 	bash rm -r ../../data/raw/Yao/SS4/$REGION/*
+	
 done

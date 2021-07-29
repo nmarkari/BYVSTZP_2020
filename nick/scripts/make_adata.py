@@ -14,10 +14,11 @@ def main(matrix, cells, transcripts,meta,region):
     
     metadata_full = pd.read_csv(meta)
     metadata_aca = metadata_full.loc[lambda df: df['region_label'] == region, :]
-    metadata_aca.rename(columns={'exp_component_name':'cell_id'})
+    metadata_aca = metadata_aca.rename(columns={'exp_component_name':'cell_id'})
     rows = pd.read_csv(cells, header=None, names=["cell_id"])
-    rows['cell_id'] = rows['cell_id'].apply(lambda x: x.split("/")[8])
-    rows.merge(metadata_aca[['cell_id','cluster_id','cluster_label','subclass_id','subclass_label']], how='left', on='cell_id')
+    rows['cell_id'] = rows['cell_id'].apply(lambda x: x.split("/")[-1])
+    rows = rows.merge(metadata_aca[['cell_id','cluster_id','cluster_label','subclass_id','subclass_label','region_label','class_label','cluster_color','class_id']], how='left', on='cell_id')
+
 
     adata = anndata.AnnData(X=CSRmatrix, obs=rows, var=cols)
 

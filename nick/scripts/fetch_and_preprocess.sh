@@ -2,18 +2,13 @@
 set -o errexit 
 #executes other scripts in this folder from start to finish
 
-#retrieve data
 
-#the following code was pasted into the google chrome console from this site http://data.nemoarchive.org/biccn/grant/u19_zeng/zeng/transcriptome/scell/ (in the VMH and VMHvl folders)
-#the object outputted by that was copied and pasted to make the manifest.tsv files
-#var arr = [], l = document.links;
-#for(var i=0; i<l.length; i++) {
-#if (l[i].href.split(".").slice(-2).join(".") === "fastq.tar"){
-#        arr.push(l[i].href);
-#    }
-#}
-#HIP failed to make adata
-for REGION in 'ORB' 'ENTm' 'ENTl' 'PAR-POST-Pre' 'SUB-ProS'
+#SS: HIP, ORB, ENTm, ENTl, SUB-ProS done. PAR POST Pre made an empty manifest
+#ORB SM-GE66Z_S370_E1-50_R2.fastq.gz did not exist, deleted it and it worked, but havent made adata yet
+#for REGION in 'RSP' 'TEa-PERI-ECT' 'AI' 'PL-ILA'
+#for REGION in 'HIP'
+#for REGION in 'VIS' 'PTLp' 'SSs' 'GU' 'AUD' 'ACA'
+for REGION in 'HIP'
 do
 	if [ ! -d "../../data/raw/Yao/SS4/$REGION" ]; then
 		mkdir "../../data/raw/Yao/SS4/$REGION"
@@ -37,8 +32,8 @@ do
 	fi
 
 	#SMARTSEQ
-	#echo "BEGIN manifest_2_tsv.sh SS4 $REGION"
-	#bash manifest_2_tsv.sh $REGION
+	##echo "BEGIN manifest_2_tsv.sh SS4 $REGION" #DEPRECATED
+	##bash manifest_2_tsv.sh $REGION
 	echo "BEGIN make_manifest.py SS4 $REGION"
 	./make_manifest.py -tech "SS4" -region $REGION
 	echo "BEGIN wget.sh SS4 $REGION"
@@ -52,6 +47,6 @@ do
 		-c "../../data/preprocessed/Yao/SS4/$REGION/matrix.cells" -t "../../data/preprocessed/Yao/SS4/$REGION/transcripts.txt" \
 		-meta "../metadata_files/CTX_Hip_anno_SSv4.csv" --outdir "../../data/preprocessed/Yao/SS4/$REGION" -region $REGION
 	echo "DELETING fastqs for SS4 $REGION"
-	bash rm -r ../../data/raw/Yao/SS4/$REGION/*
+	rm -r ../../data/raw/Yao/SS4/$REGION/*
 	
 done

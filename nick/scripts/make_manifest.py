@@ -8,7 +8,7 @@ def main(tech, region):
 	all_metadata = all_metadata.rename(columns={'exp_component_name':'cell_id'})
 	metadata = all_metadata.loc[lambda df: df['region_label'] == region, :]
 
-	all_fastqs = pd.read_csv('../all_fastqs.tsv', sep='\t', header=None, names=['url'])
+	all_fastqs = pd.read_csv('../manifest_complete_and_mostly_complete_regions.tsv', sep='\t', header=None, names=['url'])
 	all_fastqs['cell_id'] = all_fastqs['url'].apply(lambda x: x.split("/")[13])
 	all_fastqs['cell_id'] = all_fastqs['cell_id'].apply(lambda x: x.split(".")[0])
 	all_fastqs

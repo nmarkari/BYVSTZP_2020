@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-cat ../../data/SMARTseq/out_gencode/transcripts.txt | tr "|" "\t" > ../../data/SMARTseq/out_gencode/transcripts_fixed.txt
